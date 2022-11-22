@@ -85,6 +85,10 @@
       <button>Console Trace</button>
       <button>Trigger a Global Error</button>
     </section>
+
+    <!--Error Test for Step 3-->
+    <!-- <button id="test-btn">Click Me</button> -->
+
   </main>
 
   <script>
@@ -102,6 +106,142 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    //console log
+    const logButton=errorBtns[0];
+    logButton.addEventListener("click",()=>{
+      console.log("Console Log Demo");
+    })
+
+    //console error
+    const errorButton=errorBtns[1];
+    errorButton.addEventListener("click",()=>{
+      console.error("Console Error Demo");
+    })
+
+    //console count
+    const countButton=errorBtns[2];
+    const word="Count Button"
+    countButton.addEventListener("click",()=>{
+      console.count(word);
+    })
+
+    //console warn
+    const warnButton=errorBtns[3];
+    warnButton.addEventListener("click",()=>{
+      console.warn("Console Warn Demo");
+    })
+
+    //console assert
+    const assertButton=errorBtns[4];
+    assertButton.addEventListener("click",()=>{
+      const number=5;
+      console.assert(number%2===0, "number is not even!");
+    })
+
+    //console.clear
+    const clearButton=errorBtns[5];
+    clearButton.addEventListener("click",()=>{
+      console.clear();
+    })
+
+    //console.dir
+    const dirButton=errorBtns[6];
+    dirButton.addEventListener("click",()=>{
+      console.dir(dirButton);
+    });
+
+    //console.dirxml
+    const dirXmlButton=errorBtns[7];
+    dirXmlButton.addEventListener("click",()=>{
+      console.dirxml(dirXmlButton);
+    });
+
+    //console group start
+    const groupStart=errorBtns[8];
+    groupStart.addEventListener("click", ()=>{
+      console.group();
+    })
+
+    //console group end
+    const groupEnd=errorBtns[9];
+    groupEnd.addEventListener("click",()=>{
+      console.groupEnd();
+    })
+
+    //console table
+    const tableButton=errorBtns[10];
+    tableButton.addEventListener("click",()=>{
+      console.table(["apple","oranges","bananas"]);
+    })
+
+    //console time start
+    const timeStart=errorBtns[11];
+    timeStart.addEventListener("click",()=>{
+      console.time("Timer Button");
+    })
+
+    //console time end
+    const timeEnd=errorBtns[12];
+    timeEnd.addEventListener("click",()=>{
+      console.timeEnd("Timer Button");
+    })
+    
+    //console trace
+    function myFunc(){
+      function myOtherFunc(){
+        console.trace();
+      }
+      myOtherFunc();
+    }
+    const traceButton=errorBtns[13];
+    traceButton.addEventListener("click",()=>{
+      myFunc();
+    })
+
+  //Step 3
+  try{
+    const testButton=document.querySelector("#test-btn");
+    testButton.addEventListener("click",()=>{
+      console.log("Clicked!")
+    });
+  } catch(err){
+    console.log("An error occurs!");
+  }
+
+  //Step 4
+  class ValidationError extends Error{
+    constructor(message){
+      super(message);
+      this.name="ValidationError";
+    }
+  }
+
+  function readStudent(string){
+    let student=JSON.parse(string);
+    if(!student.name){
+      throw new ValidationError("Field Missing: name");
+    }
+    if(!student.id){
+      throw new ValidationError("Field Missing: id");
+    }
+  }
+
+  try{
+    let student=readStudent('{"name": "Alex"}');
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      console.log("Invalid data: " + err.message); 
+    } else if (err instanceof SyntaxError) {
+      console.log("JSON Syntax Error: " + err.message);
+    } else {
+      throw err;
+    }
+  }
+
+  //Step 5
+  
+
   </script>
 </body>
 
