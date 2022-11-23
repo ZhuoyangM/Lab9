@@ -89,8 +89,17 @@
     <!--Error Test for Step 3-->
     <!-- <button id="test-btn">Click Me</button> -->
 
-  </main>
 
+  </main>
+  <!--TrackJS-->
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "6e78798f5d8f4576b2a0a011bb84027f"
+    });
+  </script>
+  
+  <!--Code-->
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -107,6 +116,7 @@
     // Start your code here
     // You may move this JS to another file if you wish
 
+    //Step 2
     //console log
     const logButton=errorBtns[0];
     logButton.addEventListener("click",()=>{
@@ -203,10 +213,10 @@
   try{
     const testButton=document.querySelector("#test-btn");
     testButton.addEventListener("click",()=>{
-      console.log("Clicked!")
+      console.log("Button Clicked!")
     });
   } catch(err){
-    console.log("An error occurs!");
+    console.log("Step 3: An error occurs!");
   }
 
   //Step 4
@@ -231,15 +241,27 @@
     let student=readStudent('{"name": "Alex"}');
   } catch (err) {
     if (err instanceof ValidationError) {
-      console.log("Invalid data: " + err.message); 
+      console.log("Step 4: "+ err.name+ ": Invalid data: " + err.message); 
     } else if (err instanceof SyntaxError) {
-      console.log("JSON Syntax Error: " + err.message);
+      console.log("Step 4: JSON Syntax Error: " + err.message);
     } else {
       throw err;
     }
   }
 
   //Step 5
+  //trigger global error
+  const globalError=errorBtns[14];
+  window.addEventListener("error",()=>{
+    console.log("Global Error: Sadly an error happened my friend!");
+  })
+
+  globalError.addEventListener("click",()=>{
+    const badCode="const s";
+    eval(badCode);
+  })
+
+  
   
 
   </script>
